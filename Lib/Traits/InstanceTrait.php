@@ -16,7 +16,7 @@ Trait InstanceTrait{
     }
 
 
-    public static function getMutiInstance(string $type){
+    public static function getMutiInstance($type = null){
 
         static $object;
 		if(empty($object) || !isset($object[$type])){
@@ -28,7 +28,7 @@ Trait InstanceTrait{
     }
 
 
-    public static function copyMutiInstance(string $type){
+    public static function copyMutiInstance($type = null){
 
         $params = func_get_args();
         $obj = clone static::getMutiInstance(...$params);
