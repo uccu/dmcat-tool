@@ -19,7 +19,7 @@ Trait InstanceTrait{
     public static function getMutiInstance(string $type){
 
         static $object;
-		if(empty($object) && !isset($object[$type])){
+		if(empty($object) || !isset($object[$type])){
 
             $params = func_get_args();
             $object[$type] = new static(...$params);
