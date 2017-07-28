@@ -15,7 +15,7 @@
     },
     "autoload": {
 		"psr-4": {
-            "uccu\\dmcatTool\\": "Lib"
+            "Uccu\\DmcatTool\\": "Lib"
 		}
 	},
     "repositories": {

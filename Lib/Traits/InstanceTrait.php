@@ -1,5 +1,5 @@
 <?php
-namespace uccu\Tool\Traits;
+namespace Uccu\DmcatTool\Traits;
 
 Trait InstanceTrait{
 
