@@ -55,11 +55,9 @@ class LocalConfig{
 
     public static function __callStatic($name, $arguments) 
     {
-        if(isset(self::$_configs[$name]))return self::$_configs[$name];
+        
+        return self::getMutiInstance($name);
 
-        self::$_configs[$name] = self::getMutiInstance($name);
-
-        return self::$_configs[$name];
     }
 
 	public static function get($name){
