@@ -62,5 +62,8 @@ class LocalConfig{
         return self::$_configs[$name];
     }
 
+	public static function get($name){
+		return self::config()->$name;
+	}
 
 }
