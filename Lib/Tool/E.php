@@ -3,7 +3,9 @@ namespace Uccu\DmcatTool\Tool;
 
 class E extends \Exception{
 
-	
+	static public $_BASE_ROOT = __DIR__;
+	static public $_LOG_ROOT = __DIR__;
+
 	protected $_trace        = null;
 
 	public function __construct($message = '',$code = 0,$file = NULL,$line = NULL,array $trace = []) {
@@ -72,7 +74,7 @@ class E extends \Exception{
 		!$line && $line = 'NULL';
 		$file = $exception->getFile();
 		!$file && $file = '{core}';
-		$file = preg_replace('#^'.BASE_ROOT.'#i','',$file);
+		$file = preg_replace('#^'.self::$_BASE_ROOT.'#i','',$file);
 		$file = preg_replace('#\..*$#i','',$file);
 
 		$trace = $exception->getBacktrace();
@@ -90,14 +92,14 @@ class E extends \Exception{
 		}
 
 		# 记录日志
-		!$fileName && $fileName = DATE_TODAY;
+		!$fileName && $fileName = date('Ymd');
 		$enableLog = LocalConfig::get('ERROR_LOG');
-		$filePath = LOG_ROOT . $fileName . '.log';
+		$filePath = self::$_LOG_ROOT . $fileName . '.log';
 
 		# 判断文件写入权限
 		if(
 			$enableLog && 
-			is_writable(LOG_ROOT) && 
+			is_writable(self::$_LOG_ROOT) && 
 			(
 				!file_exists($filePath) || is_writable($filePath)
 			)
