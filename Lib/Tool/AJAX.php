@@ -10,7 +10,7 @@ class AJAX{
     //输出口
     private static function outPut($code ,$data ,$message ,$url){
 
-        $content = new stdClass;
+        $content = new \stdClass;
 
         $content->data = (object)$data;
 

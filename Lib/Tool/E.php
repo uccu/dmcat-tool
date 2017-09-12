@@ -1,7 +1,7 @@
 <?php
 namespace Uccu\DmcatTool\Tool;
 
-class E extends Exception{
+class E extends \Exception{
 
 	
 	protected $_trace        = null;
