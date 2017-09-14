@@ -55,8 +55,9 @@ class E extends \Exception{
 
         if (0 === ($no & error_reporting())) {
             return;
-        }
-
+		}elseif($no == 8){
+			return;
+		}
         $trace = debug_backtrace();
 
 
