@@ -17,16 +17,17 @@ class AJAX{
         $content->message = $message.'';
         $content = json_encode($content);
 
-        echo $content;
 
         while (0 < ob_get_level()) {
             ob_end_flush();
         }
 
         $hook = LocalConfig::get('HOOK_CLASS');
-        if(method_exists($hook,'ajaxCallback')){
+        if(is_callable([$hook,'ajaxCallback'])){
             $hook::ajaxCallback($code ,$data ,$message ,$url);
         }
+
+        echo $content;
 
         exit();
 
@@ -50,7 +51,7 @@ class AJAX{
     }
 
     //错误/失败
-    static function error($message ,$code = 400 ,$url = ''){
+    static function error($message = '',$code = 400 ,$url = ''){
 
         $url = !$url && is_string($code) ? $code : $url;
 
