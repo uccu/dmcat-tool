@@ -11,21 +11,21 @@ class AJAX{
     private static function outPut($code ,$data ,$message ,$url){
 
         $content = new \stdClass;
-
         $content->data = (object)$data;
-
         $content->code = floor($code);
-
         $content->url = $url.'';
-
         $content->message = $message.'';
-
         $content = json_encode($content);
 
         echo $content;
 
         while (0 < ob_get_level()) {
             ob_end_flush();
+        }
+
+        $hook = LocalConfig::get('HOOK_CLASS');
+        if(method_exists($hook,'ajaxCallback')){
+            $hook::ajaxCallback($code ,$data ,$message ,$url);
         }
 
         exit();
