@@ -75,7 +75,7 @@ class E extends \Exception{
 		!$line && $line = 'NULL';
 		$file = $exception->getFile();
 		!$file && $file = '{core}';
-		$file = preg_replace('#^'.self::$_BASE_ROOT.'#i','',$file);
+		$file = str_replace(self::$_BASE_ROOT,'',$file);
 		$file = preg_replace('#\..*$#i','',$file);
 
 		$trace = $exception->getBacktrace();
