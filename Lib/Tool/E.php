@@ -14,7 +14,7 @@ class E extends \Exception{
         $line 	&& $this->line   = $line;
         $trace 	&& $this->_trace = $trace;
 
-        parent::__construct($message, $code);
+        parent::__construct($message, (int)$code);
 
 	}
 	
