@@ -56,7 +56,7 @@ class LocalConfig{
     public static function __callStatic($name, $arguments) 
     {
         
-        return self::getMutiInstance($name);
+        return self::getMutiInstance(ucfirst($name));
 
     }
 
