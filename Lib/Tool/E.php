@@ -34,9 +34,7 @@ class E extends \Exception{
 			self::output($exception);
         }
 
-        while (0 < ob_get_level()) {
-            ob_end_flush();
-		}
+        
 		
 		$str = $exception->getMessage();
 		$no = $exception->getCode();
@@ -123,6 +121,10 @@ class E extends \Exception{
 
 			case 'string':
 				echo $message;
+
+				while (0 < ob_get_level()) {
+					ob_end_flush();
+				}
 				break;
 			default:
 				AJAX::error($message ,999 );

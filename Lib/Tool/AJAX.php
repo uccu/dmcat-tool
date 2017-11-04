@@ -18,9 +18,7 @@ class AJAX{
         $content = json_encode($content);
 
 
-        while (0 < ob_get_level()) {
-            ob_end_flush();
-        }
+        
 
         $hook = LocalConfig::get('HOOK_CLASS');
         if(is_callable([$hook,'ajaxCallback'])){
@@ -28,6 +26,10 @@ class AJAX{
         }
 
         echo $content;
+
+        while (0 < ob_get_level()) {
+            ob_end_flush();
+        }
 
         exit();
 
