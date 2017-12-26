@@ -140,10 +140,11 @@ class E extends \Exception{
 
 	final public static function handleShutdown(){
 		$error = error_get_last();
-		if($error && $error['type']){
-
-			throw new self('Shutdown '.$error['message']);
-
+		if($error && isset($error['type']) && $error['type']){
+			$message = isset($error['message'])?$error['message']:'';
+			$file = isset($error['file'])?$error['file']:'';
+			$line = isset($error['line'])?$error['line']:'';
+			self::output(new self('Shutdown '.$message,0,$file,$line));
 		}
 	}
 
