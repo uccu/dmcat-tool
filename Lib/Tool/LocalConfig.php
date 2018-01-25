@@ -14,7 +14,7 @@ class LocalConfig{
     function __construct($name){
 
 		$path = self::$_CONFIG_ROOT.$name.'.conf';
-		$file = fopen($path, "r");
+		$file = @fopen($path, "r");
 
 		$config = new stdClass;
 		if(!$file)return $config;
@@ -51,7 +51,9 @@ class LocalConfig{
 
 	}
 
-
+	public function __get($name){
+		return null;
+	}
 
     public static function __callStatic($name, $arguments) 
     {
