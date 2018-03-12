@@ -42,7 +42,7 @@ class E extends \Exception{
 		$line = $exception->getLine();
 		$trace = $exception->getTrace();
 
-		
+
 		$exception = new self('Exception '.$str, $no, $file, $line, $trace);
 		self::output($exception);
 	}
@@ -68,12 +68,14 @@ class E extends \Exception{
 	final public static function output(E $exception,$no = 0,$fileName = ''){
 
 		$message = $exception->getMessage();
+		$message = preg_replace('#, *called in.*#','',$message);
 		
 		$line = $exception->getLine();
 		!$line && $line = 'NULL';
 		$file = $exception->getFile();
 		!$file && $file = '{core}';
-		$file = str_replace(self::$_BASE_ROOT,'',$file);
+
+		$file = str_replace(str_replace('\\','/',self::$_BASE_ROOT),'',str_replace('\\','/',$file));
 		$file = preg_replace('#\..*$#i','',$file);
 
 		$trace = $exception->getBacktrace();
