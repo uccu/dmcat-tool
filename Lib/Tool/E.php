@@ -34,7 +34,7 @@ class E extends \Exception{
 			self::output($exception);
         }
 
-        
+		$sql = isset($exception->sql) ? $exception->sql : '';
 		
 		$str = $exception->getMessage();
 		$no = $exception->getCode();
@@ -44,6 +44,7 @@ class E extends \Exception{
 
 
 		$exception = new self('Exception '.$str, $no, $file, $line, $trace);
+		$exception->sql = $sql;
 		self::output($exception);
 	}
 
@@ -84,6 +85,8 @@ class E extends \Exception{
 		$message .= ' in '.$file.':'.$line;
 		
 		$raise = '['.date('Y-m-d H:i:s')."]\n".$message."\n";
+		if($exception->sql) $raise .= $exception->sql . "\n";
+		
 		foreach($trace as $t){
 
 			if(isset($t['file']) && isset($t['line'])){
